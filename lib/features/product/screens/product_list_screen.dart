@@ -2,17 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_state_managment/features/cart/screens/cart_screen.dart';
-import 'package:flutter_state_managment/features/product/constants/product_constants.dart';
 import 'package:flutter_state_managment/features/product/widgets/product_tile.dart';
 
-class ProductListScreen extends StatefulWidget {
+class ProductListScreen extends StatelessWidget {
   const ProductListScreen({super.key});
 
-  @override
-  _ProductListScreenState createState() => _ProductListScreenState();
-}
-
-class _ProductListScreenState extends State<ProductListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,9 +19,10 @@ class _ProductListScreenState extends State<ProductListScreen> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (_) => CartScreen(
-                    cartItems: productList.where((product) => product.isSelected).toList(),
-                  ),
+                  builder: (_) =>
+                      CartScreen(
+                        cartItems: Provider()
+                      ),
                 ),
               );
             },
@@ -41,9 +36,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
           return ProductTile(
             product: product,
             onChanged: (value) {
-              setState(() {
-                product.isSelected = value ?? false;
-              });
+
             },
           );
         },
