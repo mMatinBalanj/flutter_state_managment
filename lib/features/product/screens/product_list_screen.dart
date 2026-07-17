@@ -1,5 +1,4 @@
-// ignore_for_file: prefer_const_constructors, library_private_types_in_public_api
-
+// ignore_for_file: prefer_const_constructors, library_private_types_in_public_ap
 import 'package:flutter/material.dart';
 import 'package:flutter_state_managment/features/cart/screens/cart_screen.dart';
 import 'package:flutter_state_managment/features/product/widgets/product_tile.dart';
@@ -28,18 +27,14 @@ class ProductListScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: Consumer<ProductProvider>(
-        builder:(context, productProvider, child) {
-          return ListView.builder(
-            itemCount: productProvider.products.length,
-            itemBuilder: (context, index) {
-              final product = productProvider.products[index];
-              return ProductTile(
-                product: product,
-                onChanged: (value) {
-                  productProvider.toggleProductSelection(product);
-                },
-              );
+      body: ListView.builder(
+        itemCount: context.watch<ProductProvider>().products.length,
+        itemBuilder: (context, index) {
+          final product = context.watch<ProductProvider>().products[index];
+          return ProductTile(
+            product: product,
+            onChanged: (value) {
+              context.read<ProductProvider>().toggleProductSelection(product);
             },
           );
         },
