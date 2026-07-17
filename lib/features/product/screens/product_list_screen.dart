@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_state_managment/features/cart/screens/cart_screen.dart';
 import 'package:flutter_state_managment/features/product/widgets/product_tile.dart';
+import 'package:flutter_state_managment/providers/product_provider.dart';
+import 'package:provider/provider.dart';
 
 class ProductListScreen extends StatelessWidget {
   const ProductListScreen({super.key});
@@ -19,24 +21,25 @@ class ProductListScreen extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (_) =>
-                      CartScreen(
-                        cartItems: Provider()
-                      ),
+                  builder: (_) => CartScreen(),
                 ),
               );
             },
           ),
         ],
       ),
-      body: ListView.builder(
-        itemCount: productList.length,
-        itemBuilder: (context, index) {
-          final product = productList[index];
-          return ProductTile(
-            product: product,
-            onChanged: (value) {
-
+      body: Consumer<ProductProvider>(
+        builder:(context, productProvider, child) {
+          return ListView.builder(
+            itemCount: productProvider.products.length,
+            itemBuilder: (context, index) {
+              final product = productProvider.products[index];
+              return ProductTile(
+                product: product,
+                onChanged: (value) {
+                  productProvider.toggleProductSelection(product);
+                },
+              );
             },
           );
         },

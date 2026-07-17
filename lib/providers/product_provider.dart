@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../features/product/models/product.dart';
 
 class ProductProvider extends ChangeNotifier{
-   List<Product> _producs = [
+   final List<Product> _producs = [
     Product(
       name: 'Wireless Headphones',
       description: 'Experience premium sound quality with noise cancellation.',
@@ -70,5 +70,5 @@ class ProductProvider extends ChangeNotifier{
      product.isSelected = !product.isSelected;
      notifyListeners();
    }
-   List<Product> get selectedProduct => _producs.where((element) => element.isSelected).toList();
+   List<Product> get selectedProducts => _producs.where((element) => element.isSelected).toList();
 }
