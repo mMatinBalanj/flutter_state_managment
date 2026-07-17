@@ -1,14 +1,16 @@
 // ignore_for_file: prefer_const_constructors, library_private_types_in_public_ap
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_state_managment/features/cart/screens/cart_screen.dart';
 import 'package:flutter_state_managment/features/product/widgets/product_tile.dart';
 import 'package:provider/provider.dart';
+import '../../../notifier/product_notifier.dart';
 
-class ProductListScreen extends StatelessWidget {
+class ProductListScreen extends ConsumerWidget {
   const ProductListScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Products'),
@@ -27,13 +29,13 @@ class ProductListScreen extends StatelessWidget {
         ],
       ),
       body: ListView.builder(
-        itemCount: ref.watch<ProductNotifier>().products.length,
+        itemCount: ref.watch(productNotifier).length,
         itemBuilder: (context, index) {
-          final product = ref.watch<ProductNotifier>().products[index];
+          final product = ref.watch(productNotifier)[index];
           return ProductTile(
             product: product,
             onChanged: (value) {
-              ref.read<ProductNotifier>().toggleProductSelection(product);
+              ref.read(productNotifier.notifier).toggleSelectionProduct(product);
             },
           );
         },
