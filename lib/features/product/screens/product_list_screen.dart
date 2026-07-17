@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_state_managment/features/cart/screens/cart_screen.dart';
 import 'package:flutter_state_managment/features/product/widgets/product_tile.dart';
-import 'package:flutter_state_managment/providers/product_provider.dart';
 import 'package:provider/provider.dart';
 
 class ProductListScreen extends StatelessWidget {
@@ -28,13 +27,13 @@ class ProductListScreen extends StatelessWidget {
         ],
       ),
       body: ListView.builder(
-        itemCount: context.watch<ProductProvider>().products.length,
+        itemCount: ref.watch<ProductNotifier>().products.length,
         itemBuilder: (context, index) {
-          final product = context.watch<ProductProvider>().products[index];
+          final product = ref.watch<ProductNotifier>().products[index];
           return ProductTile(
             product: product,
             onChanged: (value) {
-              context.read<ProductProvider>().toggleProductSelection(product);
+              ref.read<ProductNotifier>().toggleProductSelection(product);
             },
           );
         },

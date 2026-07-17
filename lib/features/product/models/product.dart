@@ -5,7 +5,7 @@ class Product {
   final String description;
   final double price;
   final Color color;
-  bool isSelected;
+  final bool isSelected;
 
   Product({
     required this.name,
@@ -14,4 +14,19 @@ class Product {
     required this.color,
     this.isSelected = false,
   });
+
+  Product copyWith({
+     String? name,
+     String? description,
+     double? price,
+     Color? color,
+     bool? isSelected,
+}){
+    return Product(
+        name: name ?? this.name,
+        description: description ?? this.name,
+        price: price ?? this.price,
+        color: color ?? this.color
+    );
+  }
 }
