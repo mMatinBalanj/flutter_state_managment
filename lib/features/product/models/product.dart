@@ -24,9 +24,10 @@ class Product {
 }){
     return Product(
         name: name ?? this.name,
-        description: description ?? this.name,
+        description: description ?? this.description,
         price: price ?? this.price,
-        color: color ?? this.color
+        color: color ?? this.color,
+        isSelected: isSelected ?? this.isSelected,
     );
   }
 }

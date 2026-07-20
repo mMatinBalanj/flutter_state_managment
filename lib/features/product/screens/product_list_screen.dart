@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_state_managment/features/cart/screens/cart_screen.dart';
 import 'package:flutter_state_managment/features/product/widgets/product_tile.dart';
-import 'package:provider/provider.dart';
 import '../../../notifier/product_notifier.dart';
 
 class ProductListScreen extends ConsumerWidget {
@@ -11,6 +10,7 @@ class ProductListScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final products = ref.watch(productNotifier);
     return Scaffold(
       appBar: AppBar(
         title: Text('Products'),
@@ -29,14 +29,12 @@ class ProductListScreen extends ConsumerWidget {
         ],
       ),
       body: ListView.builder(
-        itemCount: ref.watch(productNotifier).length,
+        itemCount: products.length,
         itemBuilder: (context, index) {
-          final product = ref.watch(productNotifier)[index];
+          final product = products[index];
           return ProductTile(
             product: product,
-            onChanged: (value) {
-              ref.read(productNotifier.notifier).toggleSelectionProduct(product);
-            },
+            onChanged: (value) => ref.read(productNotifier.notifier).toggleProductSelected(product),
           );
         },
       ),

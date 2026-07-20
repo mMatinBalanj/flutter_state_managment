@@ -2,15 +2,16 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_state_managment/features/product/models/product.dart';
 import 'package:flutter_state_managment/notifier/product_notifier.dart';
-import 'package:provider/provider.dart';
 
 class CartScreen extends ConsumerWidget {
-  CartScreen();
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // final cartItems2 = ref.watch(productNotifier.select(
+    //     (state)=> state.where(
+    //         (product)=> product.isSelected,
+    //     ).toList(),
+    // ));
     final cartItems = ref.read(productNotifier.notifier).selectedProducts;
 
     return Scaffold(

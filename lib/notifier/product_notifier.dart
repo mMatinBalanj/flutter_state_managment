@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import '../features/product/models/product.dart';
 
@@ -73,7 +74,7 @@ class ProductNotifier extends StateNotifier<List<Product>>{
   );
   List<Product> get selectedProducts => state.where((product) => product.isSelected).toList();
 
-  void toggleSelectionProduct(Product product){
+  void toggleProductSelected(Product product){
     state = state.map((p){
       if(p == product){
         return p.copyWith(isSelected: !p.isSelected);

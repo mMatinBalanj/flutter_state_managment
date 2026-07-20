@@ -1,0 +1,2 @@
+- [x] اصلاح متد `copyWith` در فایل `product.dart`
+- [x] بهینه‌سازی نحوه استفاده از `ref.watch` در `product_list_screen.dart`
